@@ -80,4 +80,6 @@ set_target_properties(cjson PROPERTIES PREFIX "")
 target_link_libraries(cjson ${_MODULE_LINK})
 install(TARGETS cjson DESTINATION "${_lua_module_dir}")
 
+add_library(cjson-static STATIC lua_cjson.c strbuf.c ${FPCONV_SOURCES})
+
 # vi:ai et sw=4 ts=4:
