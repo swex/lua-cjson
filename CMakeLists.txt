@@ -15,8 +15,8 @@ if(NOT CMAKE_BUILD_TYPE)
         FORCE)
 endif()
 
-find_package(Lua51 REQUIRED)
-include_directories(${LUA_INCLUDE_DIR})
+# find_package(Lua51 REQUIRED)
+# include_directories(${LUA_INCLUDE_DIR})
 
 if(NOT USE_INTERNAL_FPCONV)
     # Use libc number conversion routines (strtod(), sprintf())
@@ -77,6 +77,7 @@ endif()
 
 add_library(cjson MODULE lua_cjson.c strbuf.c ${FPCONV_SOURCES})
 set_target_properties(cjson PROPERTIES PREFIX "")
+target_link_libraries(cjson lua_static)
 target_link_libraries(cjson ${_MODULE_LINK})
 install(TARGETS cjson DESTINATION "${_lua_module_dir}")
 
