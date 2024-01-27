@@ -50,23 +50,23 @@ if(NOT HAVE_ISINF)
     add_definitions(-DUSE_INTERNAL_ISINF)
 endif()
 
-set(_MODULE_LINK "${CMAKE_THREAD_LIBS_INIT}")
+# set(_MODULE_LINK "${CMAKE_THREAD_LIBS_INIT}")
 #get_filename_component(_lua_lib_dir ${LUA_LIBRARY} PATH)
 
-if(APPLE)
-    set(CMAKE_SHARED_MODULE_CREATE_C_FLAGS
-        "${CMAKE_SHARED_MODULE_CREATE_C_FLAGS} -undefined dynamic_lookup")
-endif()
-
-if(WIN32)
-    # Win32 modules need to be linked to the Lua library.
-    set(_MODULE_LINK ${LUA_LIBRARY} ${_MODULE_LINK})
-    set(_lua_module_dir "${_lua_lib_dir}")
-    # Windows sprintf()/strtod() handle NaN/inf differently. Not supported.
-    add_definitions(-DDISABLE_INVALID_NUMBERS)
-else()
-    set(_lua_module_dir "${_lua_lib_dir}/lua/5.1")
-endif()
+# if(APPLE)
+#     set(CMAKE_SHARED_MODULE_CREATE_C_FLAGS
+#         "${CMAKE_SHARED_MODULE_CREATE_C_FLAGS} -undefined dynamic_lookup")
+# endif()
+#
+# if(WIN32)
+#     # Win32 modules need to be linked to the Lua library.
+#     set(_MODULE_LINK ${LUA_LIBRARY} ${_MODULE_LINK})
+#     set(_lua_module_dir "${_lua_lib_dir}")
+#     # Windows sprintf()/strtod() handle NaN/inf differently. Not supported.
+#     add_definitions(-DDISABLE_INVALID_NUMBERS)
+# else()
+#     set(_lua_module_dir "${_lua_lib_dir}/lua/5.1")
+# endif()
 
 if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
